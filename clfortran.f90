@@ -222,6 +222,10 @@ module clfortran
     integer(c_int64_t), parameter :: CL_EXEC_KERNEL                             = b'01'
     integer(c_int64_t), parameter :: CL_EXEC_NATIVE_KERNEL                      = b'10'
 
+    ! cl_command_queue_properties - bitfield
+    integer(c_int64_t), parameter :: CL_QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE     = b'01'
+    integer(c_int64_t), parameter :: CL_QUEUE_PROFILING_ENABLE                  = b'10'
+
     ! cl_context_info
     integer(c_int32_t), parameter :: CL_CONTEXT_REFERENCE_COUNT                 = Z'1080'
     integer(c_int32_t), parameter :: CL_CONTEXT_DEVICES                         = Z'1081'
