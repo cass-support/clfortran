@@ -55,7 +55,7 @@ program query_platforms_devices
     err = clGetPlatformIDs(0, C_NULL_PTR, num_platforms)
     if (err /= CL_SUCCESS) then
         print *, 'Error quering platforms: ', err
-        return
+        call exit(1)
     end if
 
     print '(A, I2)', 'Num Platforms: ', num_platforms
@@ -67,7 +67,7 @@ program query_platforms_devices
     err = clGetPlatformIDs(num_platforms, C_LOC(platform_ids), num_platforms)
     if (err /= CL_SUCCESS) then
         print *, 'Error quering platforms: ', err
-        return
+        call exit(1)
     end if
 
     !
