@@ -4,7 +4,7 @@
 ! This is an example file that demonstrates using CLFORTRAN to query available
 ! platforms and devices in the system, using the OpenCL API directly.
 !
-! Last Update: 23 January, 2014
+! Last Update: 18 March, 2014
 !
 ! -----------------------------------------------------------------------------
 !
@@ -199,7 +199,8 @@ subroutine query_platform_info(platform_id)
         err = clGetDeviceInfo(device_ids(i), CL_DEVICE_NAME, temp_size, C_LOC(device_name), temp_size)
 
         ! Print brief device details.
-        print *, 'Device (#', i, ' Compute Units: ', device_cu, ') - ', device_name
+        write (*, '(A,I2,A,I3,A)', advance='no') ' Device (#', i, ', Compute Units: ', device_cu, ') - '
+        print *, device_name
 
         deallocate(device_name)
     end do

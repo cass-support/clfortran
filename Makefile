@@ -42,6 +42,7 @@ CL_LIB = /usr/lib64/catalyst
 examples: clfortran
 	$(FC) examples/query_platforms_devices.f90 -L$(CL_LIB) -lOpenCL -o query_platforms_devices
 	$(FC) examples/create_device_context.f90 -L$(CL_LIB) -lOpenCL -o create_device_context
+	$(FC) examples/basic_device_io.f90 -L$(CL_LIB) -lOpenCL -o basic_device_io
 
 clfortran: clfortran.f90
 	$(FC) -c clfortran.f90

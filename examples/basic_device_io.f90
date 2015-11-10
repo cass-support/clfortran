@@ -1,8 +1,8 @@
 ! -----------------------------------------------------------------------------
 ! CLFORTRAN - OpenCL bindings module for Fortran.
 !
-! This is an example file that demonstrates using CLFORTRAN to create a basic 
-! OpenCL environment with a single GPU device (a matching context and a queue).
+! This is an example file that demonstrates using CLFORTRAN to perform basic 
+! device I/O with OpenCL API.
 !
 ! Last Update: 18 March, 2014
 !
@@ -37,6 +37,7 @@
 !
 ! Queries available platforms, chooses the first and same for its devices.
 ! After selection is made, a context is created with command queue.
+! Next, a Fortran array is copied back & forth and compared for validity.
 program create_device_context
     use clfortran
     use ISO_C_BINDING
@@ -55,6 +56,13 @@ program create_device_context
     integer(c_intptr_t), target :: context
     integer(c_int64_t) :: cmd_queue_props
     integer(c_intptr_t), target :: cmd_queue
+
+    integer(c_intptr_t), target :: d_buffer
+    integer(c_size_t) :: d_buffer_offset
+    real(c_float), allocatable, target :: array1(:, :)
+    real(c_float), allocatable, target :: array2(:, :)
+    integer(c_size_t) :: array_size_x
+    integer(c_size_t) :: array_size_y
 
     print '(A)', 'OpenCL sample for creating context and queue for GPU device'
 
@@ -139,6 +147,56 @@ program create_device_context
     ! Start OpenCL logic here.
     !
 
+    ! Allocate arrays of size 256x256 (float, 32 bit).
+    array_size_x = 256
+    array_size_y = 256
+    allocate(array1(array_size_x, array_size_y))
+    allocate(array2(array_size_x, array_size_y))
+
+    ! Initialize first array with ones.
+    array1(:, :) = 1.0
+
+    ! Allocate device buffer.
+    d_buffer = clCreateBuffer(context, CL_MEM_READ_WRITE, array_size_x * &
+        array_size_y * c_float, C_NULL_PTR, err)
+
+    if (err /= CL_SUCCESS) then
+        print *, 'Error allocating device buffer: ', err
+        call exit(1)
+    end if
+
+    print '(A,I10,A)', 'Successfuly allocated GPU device buffer, length: ',&
+        array_size_x * array_size_y * c_float, ' bytes'
+
+    ! Copy CPU data to device buffer.
+    d_buffer_offset = 0
+    err = clEnqueueWriteBuffer(cmd_queue, d_buffer, CL_TRUE, d_buffer_offset, &
+        array_size_x * array_size_y * c_float, C_LOC(array1), 0, C_NULL_PTR, &
+        C_NULL_PTR)
+
+    if (err /= CL_SUCCESS) then
+        print *, 'Error copying to device buffer: ', err
+        call exit(1)
+    end if
+
+    ! Copy device buffer back to different CPU array.
+    err = clEnqueueReadBuffer(cmd_queue, d_buffer, CL_TRUE, d_buffer_offset, &
+        array_size_x * array_size_y * c_float, C_LOC(array2), 0, C_NULL_PTR, &
+        C_NULL_PTR)
+
+    if (err /= CL_SUCCESS) then
+        print *, 'Error copying from device buffer: ', err
+        call exit(1)
+    end if
+
+    ! Compare values.
+    if (any(array1 /= array2)) then
+        print *, 'Error, arrays are not equal!'
+        call exit(1)
+    end if
+
+    print '(A)', 'Successfuly copied data to OpenCL device and back!'
+
     !
     ! End of OpenCL logic.
     !
@@ -146,6 +204,8 @@ program create_device_context
     !
     ! Release allocated handles.
     !
+    err = clReleaseMemObject(d_buffer)
     err = clReleaseCommandQueue(cmd_queue)
     err = clReleaseContext(context)
 end program create_device_context
+

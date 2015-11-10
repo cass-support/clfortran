@@ -1362,7 +1362,7 @@ module clfortran
             type(c_ptr), value :: ptr
             integer(c_int32_t), value :: num_events_in_wait_list
             type(c_ptr), value :: event_wait_list
-            integer(c_intptr_t), intent(out) :: event
+            type(c_ptr), value :: event
             
         end function
     
@@ -1398,7 +1398,7 @@ module clfortran
             type(c_ptr), value :: ptr
             integer(c_int32_t), value :: num_events_in_wait_list
             type(c_ptr), value :: event_wait_list
-            integer(c_intptr_t), intent(out) :: event
+            type(c_ptr), value :: event
             
         end function
 
@@ -1423,7 +1423,7 @@ module clfortran
             type(c_ptr), value :: ptr
             integer(c_int32_t), value :: num_events_in_wait_list
             type(c_ptr), value :: event_wait_list
-            integer(c_intptr_t), intent(out) :: event
+            type(c_ptr), value :: event
             
         end function
 
@@ -1458,7 +1458,7 @@ module clfortran
             type(c_ptr), value :: ptr
             integer(c_int32_t), value :: num_events_in_wait_list
             type(c_ptr), value :: event_wait_list
-            integer(c_intptr_t), intent(out) :: event
+            type(c_ptr), value :: event
             
         end function
 
@@ -1483,7 +1483,7 @@ module clfortran
             integer(c_size_t), value :: size
             integer(c_int32_t), value :: num_events_in_wait_list
             type(c_ptr), value :: event_wait_list
-            integer(c_intptr_t), intent(out) :: event
+            type(c_ptr), value :: event
             
         end function
 
@@ -1508,7 +1508,7 @@ module clfortran
             integer(c_size_t), value :: size
             integer(c_int32_t), value :: num_events_in_wait_list
             type(c_ptr), value :: event_wait_list
-            integer(c_intptr_t), intent(out) :: event
+            type(c_ptr), value :: event
             
         end function
 
@@ -1541,7 +1541,7 @@ module clfortran
             integer(c_size_t), value :: dst_slice_pitch
             integer(c_int32_t), value :: num_events_in_wait_list
             type(c_ptr), value :: event_wait_list
-            integer(c_intptr_t), intent(out) :: event
+            type(c_ptr), value :: event
             
         end function
 
@@ -1570,7 +1570,7 @@ module clfortran
             type(c_ptr), value :: ptr
             integer(c_int32_t), value :: num_events_in_wait_list
             type(c_ptr), value :: event_wait_list
-            integer(c_intptr_t), intent(out) :: event
+            type(c_ptr), value :: event
             
         end function
 
@@ -1599,7 +1599,7 @@ module clfortran
             type(c_ptr), value :: ptr
             integer(c_int32_t), value :: num_events_in_wait_list
             type(c_ptr), value :: event_wait_list
-            integer(c_intptr_t), intent(out) :: event
+            type(c_ptr), value :: event
             
         end function
 
@@ -1622,7 +1622,7 @@ module clfortran
             type(c_ptr), value :: region
             integer(c_int32_t), value :: num_events_in_wait_list
             type(c_ptr), value :: event_wait_list
-            integer(c_intptr_t), intent(out) :: event
+            type(c_ptr), value :: event
             
         end function
 
@@ -1647,7 +1647,7 @@ module clfortran
             type(c_ptr), value :: region
             integer(c_int32_t), value :: num_events_in_wait_list
             type(c_ptr), value :: event_wait_list
-            integer(c_intptr_t), intent(out) :: event
+            type(c_ptr), value :: event
             
         end function
 
@@ -1672,7 +1672,7 @@ module clfortran
             integer(c_size_t), value :: dst_offset
             integer(c_int32_t), value :: num_events_in_wait_list
             type(c_ptr), value :: event_wait_list
-            integer(c_intptr_t), intent(out) :: event
+            type(c_ptr), value :: event
             
         end function
 
@@ -1697,7 +1697,7 @@ module clfortran
             type(c_ptr), value :: region
             integer(c_int32_t), value :: num_events_in_wait_list
             type(c_ptr), value :: event_wait_list
-            integer(c_intptr_t), intent(out) :: event
+            type(c_ptr), value :: event
             
         end function
 
@@ -1723,7 +1723,7 @@ module clfortran
             integer(c_size_t), value :: size
             integer(c_int32_t), value :: num_events_in_wait_list
             type(c_ptr), value :: event_wait_list
-            integer(c_intptr_t), intent(out) :: event
+            type(c_ptr), value :: event
             integer(c_int32_t), intent(out) :: errcode_ret
             
         end function
@@ -1754,7 +1754,7 @@ module clfortran
             integer(c_size_t), intent(out) :: image_slice_pitch
             integer(c_int32_t), value :: num_events_in_wait_list
             type(c_ptr), value :: event_wait_list
-            integer(c_intptr_t), intent(out) :: event
+            type(c_ptr), value :: event
             integer(c_int32_t), intent(out) :: errcode_ret
             
         end function
@@ -1774,7 +1774,7 @@ module clfortran
             type(c_ptr), value :: mapped_ptr
             integer(c_int32_t), value :: num_events_in_wait_list
             type(c_ptr), value :: event_wait_list
-            integer(c_intptr_t), intent(out) :: event
+            type(c_ptr), value :: event
             
         end function
 
@@ -1795,7 +1795,7 @@ module clfortran
             integer(c_int64_t), value :: flags
             integer(c_int32_t), value :: num_events_in_wait_list
             type(c_ptr), value :: event_wait_list
-            integer(c_intptr_t), intent(out) :: event
+            type(c_ptr), value :: event
             
         end function
 
@@ -1820,7 +1820,7 @@ module clfortran
             type(c_ptr), value :: local_work_size
             integer(c_int32_t), value :: num_events_in_wait_list
             type(c_ptr), value :: event_wait_list
-            integer(c_intptr_t), intent(out) :: event
+            type(c_ptr), value :: event
             
         end function
 
@@ -1837,7 +1837,7 @@ module clfortran
             integer(c_intptr_t), value :: kernel
             integer(c_int32_t), value :: num_events_in_wait_list
             type(c_ptr), value :: event_wait_list
-            integer(c_intptr_t), intent(out) :: event
+            type(c_ptr), value :: event
             
         end function
 
@@ -1864,7 +1864,7 @@ module clfortran
             type(c_ptr), value :: args_mem_loc
             integer(c_int32_t), value :: num_events_in_wait_list
             type(c_ptr), value :: event_wait_list
-            integer(c_intptr_t), intent(out) :: event
+            type(c_ptr), value :: event
             
         end function
 
@@ -1879,7 +1879,7 @@ module clfortran
             integer(c_intptr_t), value :: command_queue
             integer(c_int32_t), value :: num_events_in_wait_list
             type(c_ptr), value :: event_wait_list
-            integer(c_intptr_t), intent(out) :: event
+            type(c_ptr), value :: event
             
         end function
 
@@ -1894,7 +1894,7 @@ module clfortran
             integer(c_intptr_t), value :: command_queue
             integer(c_int32_t), value :: num_events_in_wait_list
             type(c_ptr), value :: event_wait_list
-            integer(c_intptr_t), intent(out) :: event
+            type(c_ptr), value :: event
             
         end function
 
